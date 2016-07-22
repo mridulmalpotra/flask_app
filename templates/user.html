@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block subbody %}
+
+  {% if user_data %}
+    <h3> Data for {{ user_data.name }} </h3>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th><b>Name:</b></th>
+          <th><a href="/user/{{ user_data.name }}">{{ user_data.name }}</a></th>
+        </tr>
+        <tr>
+          <th><b>Email:</b></th>
+          <th><a href="mailto:/{{ user_data.email }}">{{ user_data.email }}</a></th>
+        </tr>
+        <tr>
+          <th><b>Mobile:</b></th>
+          <th>{{ user_data.mobile }}</th>
+        </tr>
+        <tr>
+          <th><b>Team:</b></th>
+          <th>{{ user_data.team }}</th>
+        </tr>
+
+      </tbody>
+    </table>
+  {% else %}
+    <h4>Sorry, this user cannot be found!</h4>
+  {% endif %}
+{% endblock %}

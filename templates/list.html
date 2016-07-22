@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block subhead %}
+  <link href="https://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+{% endblock %}
+
+{% block subbody %}
+  {% if user_list %}
+    <h3>List of all users in database:</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Mobile</th>
+          {% if session.logged_in %}<th>Delete</th>{% endif %}
+        </tr>
+      </thead>
+      <tbody>
+      <form action="/list" method="POST">
+        {% for entry in user_list %}
+        <tr>
+          <th><b>{{ entry.id }}</b></th>
+          <th><a href="/user/{{ entry.name }}">{{ entry.name }}</th>
+          <th>{{ entry.mobile }}</th>
+          {% if session.logged_in %}<th><input type="checkbox" name="check_{{ entry.name }}"
+          value="Delete"></th>{% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+      <br>
+      {% if session.logged_in %}<button class="btn btn-lg btn-danger btn-block" type="submit">Delete</button>{% endif %}
+      </form>
+  {% else %}
+    <h3>No users found!</h3>
+  {% endif %}
+{% endblock %}
